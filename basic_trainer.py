@@ -80,12 +80,13 @@ class BasicTrainer:
             loss_rst_dict = defaultdict(float)
             if epoch > self.threshold: is_CTR = True
             else: is_CTR = False
+
             for batch_id, batch in enumerate(dataset_handler.train_dataloader): 
                 *inputs, indices = batch
                 batch_data = inputs
                 rst_dict = self.model(indices, is_CTR, batch_data, epoch_id=epoch)
                 batch_loss = rst_dict['loss']
-
+                batch_loss.backward()
                 
                 if (batch_id + 1) % accumulation_steps == 0 or (batch_id + 1) == len(dataset_handler.train_dataloader):
 
