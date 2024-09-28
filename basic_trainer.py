@@ -9,7 +9,7 @@ import os
 import scipy
 
 class BasicTrainer:
-    def __init__(self, model, epochs=200, learning_rate=0.002, batch_size=200, lr_scheduler=None, lr_step_size=125, log_interval=5, threshold=10):
+    def __init__(self, model, epochs=200, learning_rate=0.002, batch_size=200, lr_scheduler=None, lr_step_size=125, rho=0.05, sigma=1, lmbda=0.9, device='cuda', acc_step=8, log_interval=5, threshold=10):
         self.model = model
         self.epochs = epochs
         self.learning_rate = learning_rate
@@ -99,7 +99,7 @@ class BasicTrainer:
                 else:
                     adam_optimizer.step()
                     adam_optimizer.zero_grad()
-                    
+
 
                 for key in rst_dict:
                     try:
