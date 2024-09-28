@@ -71,7 +71,7 @@ class BasicTrainer:
         if self.lr_scheduler:
             print("===>using lr_scheduler")
             self.logger.info("===>using lr_scheduler")
-            lr_scheduler = self.make_lr_scheduler(optimizer)
+            lr_scheduler = self.make_lr_scheduler(adam_optimizer)
 
         data_size = len(dataset_handler.train_dataloader.dataset)
 
