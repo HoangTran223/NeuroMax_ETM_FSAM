@@ -78,13 +78,14 @@ class BasicTrainer:
         for epoch in tqdm(range(1, self.epochs + 1)):
             self.model.train()
             loss_rst_dict = defaultdict(float)
-            if epoch > self.threshold: is_CTR = True
-            else: is_CTR = False
+            # if epoch > self.threshold: is_CTR = True
+            # else: is_CTR = False
 
             for batch_id, batch in enumerate(dataset_handler.train_dataloader): 
                 *inputs, indices = batch
                 batch_data = inputs
-                rst_dict = self.model(indices, is_CTR, batch_data, epoch_id=epoch)
+                # rst_dict = self.model(indices, is_CTR, batch_data, epoch_id=epoch)
+                rst_dict = self.model(indices, batch_data, epoch_id=epoch)
                 batch_loss = rst_dict['loss']
                 batch_loss.backward()
                 
@@ -92,7 +93,8 @@ class BasicTrainer:
 
                     sam_optimizer.first_step(zero_grad=True)
 
-                    rst_dict_adv = self.model(indices, is_CTR, batch_data, epoch_id=epoch)
+                    # rst_dict_adv = self.model(indices, is_CTR, batch_data, epoch_id=epoch)
+                    rst_dict_adv = self.model(indices, batch_data, epoch_id=epoch)
                     batch_loss_adv = rst_dict_adv['loss'] / accumulation_steps
                     batch_loss_adv.backward()
 
