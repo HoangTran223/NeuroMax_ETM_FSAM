@@ -7,6 +7,8 @@ from utils import static_utils
 import logging
 import os
 import scipy
+# from SAM_function.TRAM import TRAM
+from SAM_function.FSAM import FSAM
 
 class BasicTrainer:
     def __init__(self, model, epochs=200, learning_rate=0.002, batch_size=200, lr_scheduler=None, lr_step_size=125, rho=0.05, sigma=1, lmbda=0.9, device='cuda', acc_step=8, log_interval=5, threshold=10):
@@ -27,19 +29,18 @@ class BasicTrainer:
 
         self.logger = logging.getLogger('main')
 
-    def make_adam_optimizer(self,):
+    def make_adam_optimizer(self):
         args_dict = {
             'params': self.model.parameters(),
             'lr': self.learning_rate,
         }
-
         optimizer = torch.optim.Adam(**args_dict)
         return optimizer
     
 
     def make_sam_optimizer(self,):
         base_optimizer = torch.optim.SGD
-        optimizer = TRAM(
+        optimizer = FSAM(
             self.model.parameters(),
             base_optimizer, device=self.device,
             lr=self.learning_rate, rho=self.rho,
