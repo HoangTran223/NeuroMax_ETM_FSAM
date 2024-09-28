@@ -27,7 +27,7 @@ class BasicTrainer:
 
         self.logger = logging.getLogger('main')
 
-    def make_optimizer(self,):
+    def make_adam_optimizer(self,):
         args_dict = {
             'params': self.model.parameters(),
             'lr': self.learning_rate,
