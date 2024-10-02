@@ -7,6 +7,7 @@ import evaluations
 import datasethandler
 import scipy
 import torch
+from ETM import ETM
 
 RESULT_DIR = 'results'
 DATA_DIR = 'datasets'
@@ -47,24 +48,28 @@ if __name__ == "__main__":
     pretrainWE = scipy.sparse.load_npz(os.path.join(
         DATA_DIR, args.dataset, "word_embeddings.npz")).toarray()
      
-    model = NeuroMax(vocab_size=dataset.vocab_size,
-                    num_topics=args.num_topics,
-                    num_groups=args.num_groups,
-                    dropout=args.dropout,
-                    cluster_distribution=cluster_distribution,
-                    cluster_mean=cluster_mean,
-                    cluster_label=cluster_label,
-                    pretrained_WE=pretrainWE if args.use_pretrainWE else None,
-                    weight_loss_GR=args.weight_GR,
-                    weight_loss_ECR=args.weight_ECR,
-                    alpha_ECR=args.alpha_ECR,
-                    alpha_GR=args.alpha_GR,
-                    weight_loss_CTR=args.weight_CTR,
-                    weight_loss_InfoNCE=args.weight_InfoNCE,
-                    weight_loss_CL=args.weight_CL,
-                    beta_temp=args.beta_temp)
-    model.weight_loss_GR = args.weight_GR
-    model.weight_loss_ECR = args.weight_ECR
+    # model = NeuroMax(vocab_size=dataset.vocab_size,
+    #                 num_topics=args.num_topics,
+    #                 num_groups=args.num_groups,
+    #                 dropout=args.dropout,
+    #                 cluster_distribution=cluster_distribution,
+    #                 cluster_mean=cluster_mean,
+    #                 cluster_label=cluster_label,
+    #                 pretrained_WE=pretrainWE if args.use_pretrainWE else None,
+    #                 weight_loss_GR=args.weight_GR,
+    #                 weight_loss_ECR=args.weight_ECR,
+    #                 alpha_ECR=args.alpha_ECR,
+    #                 alpha_GR=args.alpha_GR,
+    #                 weight_loss_CTR=args.weight_CTR,
+    #                 weight_loss_InfoNCE=args.weight_InfoNCE,
+    #                 weight_loss_CL=args.weight_CL,
+    #                 beta_temp=args.beta_temp)
+
+    # model.weight_loss_GR = args.weight_GR
+    # model.weight_loss_ECR = args.weight_ECR
+
+    model = ETM(vocab_size=dataset.vocab_size, num_topics=args.num_topics, dropout=args.dropout, 
+                pretrained_WE=pretrainedWE if args.use_pretrainWE else None, )
     model = model.to(args.device)
 
     # create a trainer
@@ -73,7 +78,6 @@ if __name__ == "__main__":
                                             batch_size=args.batch_size,
                                             lr_scheduler=args.lr_scheduler,
                                             lr_step_size=args.lr_step_size,
-                                            threshold=args.threshold,
                                             rho=args.rho,
                                             device=args.device,
                                             sigma=args.sigma,

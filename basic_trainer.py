@@ -11,7 +11,7 @@ import scipy
 from SAM_function.FSAM import FSAM
 
 class BasicTrainer:
-    def __init__(self, model, epochs=200, learning_rate=0.002, batch_size=200, lr_scheduler=None, lr_step_size=125, rho=0.05, sigma=1, lmbda=0.9, device='cuda', acc_step=8, log_interval=5, threshold=10):
+    def __init__(self, model, epochs=200, learning_rate=0.002, batch_size=200, lr_scheduler=None, lr_step_size=125, rho=0.05, sigma=1, lmbda=0.9, device='cuda', acc_step=8, log_interval=5):
         self.model = model
         self.epochs = epochs
         self.learning_rate = learning_rate
@@ -19,7 +19,7 @@ class BasicTrainer:
         self.lr_scheduler = lr_scheduler
         self.lr_step_size = lr_step_size
         self.log_interval = log_interval
-        self.threshold = threshold
+        # self.threshold = threshold
 
         self.rho = rho 
         self.device = device
