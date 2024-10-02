@@ -2,7 +2,7 @@ from utils import config, log, miscellaneous, seed
 import os
 import numpy as np
 import basic_trainer
-from NeuroMax.NeuroMax import NeuroMax
+# from NeuroMax.NeuroMax import NeuroMax
 import evaluations
 import datasethandler
 import scipy
