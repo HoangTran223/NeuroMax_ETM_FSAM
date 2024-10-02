@@ -69,7 +69,7 @@ if __name__ == "__main__":
     # model.weight_loss_ECR = args.weight_ECR
 
     model = ETM(vocab_size=dataset.vocab_size, num_topics=args.num_topics, dropout=args.dropout, 
-                pretrained_WE=pretraineWE if args.use_pretrainWE else None, )
+                pretrained_WE=pretrainWE if args.use_pretrainWE else None, )
     model = model.to(args.device)
 
     # create a trainer
