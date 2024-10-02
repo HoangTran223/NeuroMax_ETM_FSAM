@@ -39,10 +39,16 @@ if __name__ == "__main__":
     #    array = cluster_distribution[key]
     #    cluster_label = [np.argmax(array[i]) for i in range(len(array))]
 
-    # load a preprocessed dataset
+
+    # dataset = datasethandler.BasicDatasetHandler(
+    #     os.path.join(DATA_DIR, args.dataset), device=args.device, read_labels=read_labels,
+    #     as_tensor=True, contextual_embed=True)
+
+
     dataset = datasethandler.BasicDatasetHandler(
         os.path.join(DATA_DIR, args.dataset), device=args.device, read_labels=read_labels,
-        as_tensor=True, contextual_embed=True)
+        as_tensor=True, batch_size=args.batch_size)
+
 
     # create a model
     pretrainWE = scipy.sparse.load_npz(os.path.join(
