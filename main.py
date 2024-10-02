@@ -27,7 +27,7 @@ if __name__ == "__main__":
     seed.seedEverything(args.seed)
     print(args)
 
-    if args.dataset in ['YahooAnswers', '20NG']:
+    if args.dataset in ['YahooAnswers', '20NG', 'AGNews', 'IMDB']:
         read_labels = True
     else:
         read_labels = False
@@ -123,9 +123,9 @@ if __name__ == "__main__":
         print(f'Purity: ', clustering_results['Purity'])
 
 
-    '''TC_15_list, TC_15 = evaluations.topic_coherence.TC_on_wikipedia(
-        os.path.join(current_run_dir, 'top_words_15.txt'))
-    print(f"TC_15: {TC_15:.5f}")'''
+    # TC_15_list, TC_15 = evaluations.topic_coherence.TC_on_wikipedia(
+    #     os.path.join(current_run_dir, 'top_words_15.txt'))
+    # print(f"TC_15: {TC_15:.5f}")
 
     filename = f"hi.txt"
     filename = filename.replace(' ', '_')
