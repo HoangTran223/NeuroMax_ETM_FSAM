@@ -63,9 +63,10 @@ class ETM(nn.Module):
         return beta
 
     def forward(self, x, avg_loss=True):
-        print(type(x))  # Kiểm tra kiểu dữ liệu
-        print(x)  # Xem nội dung thực tế của x
-        x = x['data']
+
+        # x = x['data']
+        x = x[0]
+        # contextual_emb = input[1]
         theta, mu, logvar = self.get_theta(x)
         beta = self.get_beta()
         recon_x = torch.matmul(theta, beta)
