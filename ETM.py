@@ -63,6 +63,8 @@ class ETM(nn.Module):
         return beta
 
     def forward(self, x, avg_loss=True):
+        print(type(x))  # Kiểm tra kiểu dữ liệu
+        print(x)  # Xem nội dung thực tế của x
         x = x['data']
         theta, mu, logvar = self.get_theta(x)
         beta = self.get_beta()
