@@ -82,7 +82,7 @@ class BasicTrainer:
             # else: is_CTR = False
 
             for batch_idx, batch_data in enumerate(dataset_handler.train_dataloader): 
-                rst_dict = self.model(batch_data, epoch_id=epoch, batch_idx=batch_idx)
+                rst_dict = self.model(batch_data)
                 batch_loss = rst_dict['loss']
                 batch_loss.backward()
                 
@@ -91,7 +91,7 @@ class BasicTrainer:
                     sam_optimizer.first_step(zero_grad=True)
 
                     # rst_dict_adv = self.model(indices, is_CTR, batch_data, epoch_id=epoch)
-                    rst_dict_adv = self.model(batch_data, epoch_id=epoch, batch_idx=batch_idx)
+                    rst_dict_adv = self.model(batch_data)
                     batch_loss_adv = rst_dict_adv['loss'] / accumulation_steps
                     batch_loss_adv.backward()
 
